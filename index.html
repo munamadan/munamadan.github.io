@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background: #fff;
+      color: #000;
+      padding: 20px;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+      cursor: url("cursor.png"), auto;
+    }
+
+    body.dark-mode {
+      background: #111;
+      color: #eee;
+    }
+
+    body.dark-mode .box,
+    body.dark-mode .speech-bubble,
+    body.dark-mode .project-card {
+      background: #222;
+      color: #eee;
+    }
+
+    body.dark-mode h1, 
+    body.dark-mode h2 {
+      border-color: #eee;
+    }
+
+    body.dark-mode .socials a {
+      background: #333;
+      color: #eee;
+    }
+
+    body.dark-mode .socials a:hover {
+      background: #555;
+    }
+
+    body.dark-mode .box:hover {
+      background: #8b4fc1;
+    }
+
+    body.dark-mode .project-card:hover {
+      background: #8b4fc1;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      border: 3px solid black;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: transform 0.2s ease, background 0.2s ease;
+      z-index: 999;
+    }
+
+    .toggle-btn:hover {
+      background: #ffeb99;
+      transform: scale(1.1);
+    }
+
+    body.dark-mode .toggle-btn {
+      background: #222;
+      color: #eee;
+      border-color: #eee;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-5px, 3px) skewX(10deg); }
+      40% { transform: translate(5px, -3px) skewX(-10deg); }
+      60% { transform: translate(-3px, 2px) skewX(5deg); }
+      80% { transform: translate(3px, -2px) skewX(-5deg); }
+      100% { transform: translate(0, 0); }
+    }
+
+    body.glitch {
+      animation: glitch 0.1s ease;
+    }
+
+    ::selection {
+      background: yellow;
+      color: black;
+    }
+    ::-moz-selection {
+      background: yellow;
+      color: black;
+    }
+
+    h1, h2 {
+      border-bottom: 3px solid black;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+
+    .avatar {
+      display: block;
+      text-align: center;
+      margin: 1px 0;
+    }
+
+    .avatar img {
+      width: 300px;
+      height: auto;
+      image-rendering: pixelated;
+      border: none;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .box {
+      border: 3px solid black;
+      padding: 15px;
+      background: #f9f9f9;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+      background: #fff8b3;
+    }
+
+    .box h2 {
+      font-size: 14px;
+      margin-top: 0;
+    }
+
+    .speech-bubble {
+      border: 3px solid black;
+      padding: 15px;
+      display: inline-block;
+      position: relative;
+      background: #fff;
+      margin: 20px 0;
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 20px;
+      border-width: 15px 15px 0;
+      border-style: solid;
+      border-color: black transparent transparent;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li::before {
+      content: "⚡ ";
+      color: #ff6b00;
+    }
+
+    .interests li::before {
+      content: "🎯 ";
+    }
+
+    .quest-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      background: rgba(255, 235, 153, 0.3);
+      border-left: 4px solid #ff6b00;
+    }
+
+    body.dark-mode .quest-item {
+      background: rgba(139, 79, 193, 0.2);
+      border-left-color: #8b4fc1;
+    }
+
+    .quest-item strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #ff6b00;
+    }
+
+    body.dark-mode .quest-item strong {
+      color: #ffa500;
+    }
+
+    .quest-item p {
+      font-size: 10px;
+      margin: 5px 0 0 0;
+    }
+
+    .active-quest {
+      margin-bottom: 10px;
+      padding-left: 15px;
+      border-left: 3px solid limegreen;
+    }
+
+    .active-quest::before {
+      content: "⚔️ ";
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .project-card {
+      border: 3px solid black;
+      background: #e0e0e0;
+      padding: 10px;
+      text-align: center;
+      transition: transform 0.2s ease, background 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:hover {
+      background: #ffeb99;
+      transform: scale(1.07);
+    }
+
+    .socials a {
+      text-decoration: none;
+      color: black;
+      border: 2px solid black;
+      padding: 8px 12px;
+      margin: 5px;
+      display: inline-block;
+      background: #fff;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .socials a:hover {
+      background: #90ee90;
+      transform: scale(1.1);
+    }
+
+    .download-btn {
+      background: #ffd700 !important;
+    }
+
+    .download-btn:hover {
+      background: #ffed4e !important;
+    }
+
+    body.dark-mode .download-btn {
+      background: #ff6b00 !important;
+      color: #fff !important;
+    }
+
+    body.dark-mode .download-btn:hover {
+      background: #ff8533 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="toggle-btn" onclick="toggleDarkMode()">
+    <svg width="16" height="16" viewBox="0 0 16 16" class="icon-moon">
+      <rect x="6" y="2" width="2" height="2" fill="currentColor"/>
+      <rect x="8" y="4" width="2" height="2" fill="currentColor"/>
+      <rect x="10" y="6" width="2" height="2" fill="currentColor"/>
+      <rect x="10" y="8" width="2" height="2" fill="currentColor"/>
+      <rect x="8" y="10" width="2" height="2" fill="currentColor"/>
+      <rect x="6" y="12" width="2" height="2" fill="currentColor"/>
+      <rect x="4" y="10" width="2" height="2" fill="currentColor"/>
+      <rect x="4" y="6" width="2" height="2" fill="currentColor"/>
+      <rect x="6" y="6" width="2" height="2" fill="currentColor"/>
+      <rect x="6" y="8" width="2" height="2" fill="currentColor"/>
+    </svg>
+    <svg width="16" height="16" viewBox="0 0 16 16" class="icon-sun" style="display:none;">
+      <rect x="7" y="0" width="2" height="2" fill="currentColor"/>
+      <rect x="13" y="2" width="2" height="2" fill="currentColor"/>
+      <rect x="14" y="7" width="2" height="2" fill="currentColor"/>
+      <rect x="13" y="12" width="2" height="2" fill="currentColor"/>
+      <rect x="7" y="14" width="2" height="2" fill="currentColor"/>
+      <rect x="1" y="12" width="2" height="2" fill="currentColor"/>
+      <rect x="0" y="7" width="2" height="2" fill="currentColor"/>
+      <rect x="1" y="2" width="2" height="2" fill="currentColor"/>
+      <rect x="5" y="5" width="6" height="6" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <h1>👾 My Portfolio</h1>
+
+  <div class="avatar">
+    <img src="knight.gif" alt="Knight">
+  </div>
+
+  <div class="speech-bubble">
+    Hi, I'm <strong>Dipan Kharel</strong>! 💾<br>
+    Welcome to my website.
+  </div>
+
+  <div class="container">
+    <!-- Interests -->
+    <div class="box">
+      <h2>🎮 Interests</h2>
+      <ul class="interests">
+        <li>Building cool web apps</li>
+        <li>Implementing AI and ML to solve real problems</li>
+        <li>History and Geopolitics</li>
+        <li>Open source contributions</li>
+        <li>Data engineering and analysis</li>
+      </ul>
+    </div>
+
+    <!-- Skills / Power-Ups -->
+    <div class="box">
+      <h2>⚡ Power-Ups</h2>
+      <ul>
+        <li>Python Development (Numpy, Streamlit, Pytorch)</li>
+        <li>JavaScript</li>
+        <li>Data Engineering</li>
+        <li>API Architecture</li>
+        <li>Databases and SQL</li>
+        <li>Data Analysis</li>
+      </ul>
+    </div>
+
+    <!-- Work Experience / Completed Quests -->
+<div class="box">
+  <h2>🏆 Completed Quests</h2>
+  <div class="quest-item">
+    <strong>Quest: Freelance Dev & Researcher</strong>
+    <p>Built a multimodal LLM chat app integrating APIs (OpenAI, Claude, Gemini, Llama) and deployed full-stack on Vercel & Render.</p>
+  </div>
+  <div class="quest-item">
+    <strong>Quest: Intern @ Stock Broker</strong>
+    <p>Assisted with data analysis & market research, gaining exposure to fintech workflows in Kathmandu.</p>
+  </div>
+</div>
+
+
+    <!-- Currently Working On / Active Quest -->
+    <div class="box">
+      <h2>⚔️ Active Quests</h2>
+      <div class="active-quest">
+        <strong>Building on Streamlit to make data science apps</strong>
+      </div>
+      <div class="active-quest">
+        <strong>Building a Nepali handwriting recognition ML model</strong>
+      </div>
+      <div class="active-quest">
+        <strong>Contributing to Wagtail CMS open source</strong>
+      </div>
+    </div>
+  </div>
+
+  <h2>🎮 Projects</h2>
+  <div class="projects">
+    <a href="https://github.com/munamadan" target="_blank" class="project-card">
+      <h3>Project One</h3>
+      <p>Full stack web app for recognizing Nepali scribble handwriting using neural network</p>
+    </a>
+    <a href="https://github.com/munamadan" target="_blank" class="project-card">
+      <h3>Project Two</h3>
+      <p>Smart ClipBoard extension for Chrome and Firefox</p>
+    </a>
+    <a href="https://github.com/munamadan" target="_blank" class="project-card">
+      <h3>Project Three</h3>
+      <p>Backend API built with Python and Node.js.</p>
+    </a>
+  </div>
+
+  <h2>🌐 My Socials</h2>
+  <div class="socials">
+    <a href="https://github.com/munamadan" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/dipan-kharel-5b6484291/" target="_blank">LinkedIn</a>
+  </div>
+
+  <h2>📄 Download</h2>
+  <div class="socials">
+    <a href="DipanKharelResume.pdf" download="DipanKharelCV.pdf" class="download-btn">Download CV</a>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+
+      document.body.classList.add("glitch");
+      setTimeout(() => {
+        document.body.classList.remove("glitch");
+      }, 300);
+
+      const moonIcon = document.querySelector(".icon-moon");
+      const sunIcon = document.querySelector(".icon-sun");
+      if (document.body.classList.contains("dark-mode")) {
+        moonIcon.style.display = "none";
+        sunIcon.style.display = "block";
+      } else {
+        moonIcon.style.display = "block";
+        sunIcon.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
