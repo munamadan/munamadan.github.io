@@ -95,9 +95,6 @@
             transition: box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.2s;
             will-change: left, top;
         }
-        
-        /* REMOVED .blend-mode class definition here as it's no longer needed for the cards */
-        /* .window.blend-mode { mix-blend-mode: multiply; } */
 
         .window:hover { z-index: 500; box-shadow: 10px 10px 0 var(--highlight); }
         
@@ -157,24 +154,6 @@
             transition: transform 0.05s linear;
         }
 
-        /* Spam Windows */
-        .spam-window { background: var(--accent); color: white; width: 200px; text-align: center; }
-
-        /* Thermal Printer */
-        #log-feed {
-            height: 200px; overflow: hidden; font-size: 0.7rem; font-family: 'Courier New', monospace;
-            display: flex; flex-direction: column-reverse;
-            line-height: 1.4; color: #444;
-        }
-        .log-line { border-bottom: 1px dashed #ccc; padding: 2px 0; }
-
-        /* Danger Button */
-        .danger-btn {
-            background: red; color: white; font-family: var(--font-head); font-size: 1.2rem;
-            border: 4px solid black; padding: 10px; width: 100%; cursor: none;
-            text-transform: uppercase; animation: pulse 2s infinite;
-        }
-
         /* Footer Ticker */
         .ticker-wrap {
             position: fixed; bottom: 0; left: 0; width: 100%;
@@ -228,7 +207,6 @@
         }
 
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(0.98); } 100% { transform: scale(1); } }
         @keyframes stamp-pop { 0% { transform: translate(-50%, -50%) scale(2) rotate(-15deg); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(1) rotate(-15deg); opacity: 0.8; } }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -259,7 +237,7 @@
         <span id="reset-layout" style="background: var(--accent); color: white; padding: 2px 5px; font-size: 0.8rem; pointer-events: auto; cursor: pointer;">RESET VIEW</span>
     </div>
 
-    <div class="window" id="win-identity" style="top: 5%; left: 2%; width: 350px; z-index: 5;">
+    <div class="window" id="win-identity" style="top: 5%; left: 2%; width: 350px; z-index: 1;">
         <div class="win-header" style="background: var(--ink);">
             <span>/// IDENTITY_MAIN</span>
             <div class="win-controls"><span></span><span></span></div>
@@ -275,7 +253,7 @@
         </div>
     </div>
 
-    <div class="window" id="win-security" style="top: 5%; left: 27%; width: 200px; z-index: 9;">
+    <div class="window" id="win-security" style="top: 5%; left: 38%; width: 200px; z-index: 2;">
         <div class="win-header" style="background: var(--ink);">
             <span>/// SECURITY_FEED</span>
             <div class="win-controls"><span></span><span></span></div>
@@ -287,7 +265,7 @@
         </div>
     </div>
 
-    <div class="window" id="win-proj2" style="top: 5%; left: 41%; width: 280px; z-index: 2;">
+    <div class="window" id="win-proj2" style="top: 5%; left: 60%; width: 280px; z-index: 3;">
         <div class="win-header" style="background: var(--blue);">
             <span>PROJ_02: HTTP CLIENT</span>
             <div class="win-controls"><span></span><span></span></div>
@@ -299,7 +277,7 @@
         </div>
     </div>
 
-    <div class="window" id="win-proj1" style="top: 10%; left: 62%; width: 300px; z-index: 3;">
+    <div class="window" id="win-proj1" style="top: 32%; left: 2%; width: 300px; z-index: 4;">
         <div class="win-header" style="background: var(--blue);">
             <span>PROJ_01: Extension</span>
             <div class="win-controls"><span></span><span></span></div>
@@ -311,15 +289,16 @@
         </div>
     </div>
 
-    <div class="window" id="win-disk" style="top: 38%; left: 27%; width: 150px; border-radius: 0; z-index: 1;">
+    <div class="window" id="win-disk" style="top: 32%; left: 38%; width: 150px; border-radius: 0; z-index: 5;">
         <div class="win-header" style="background: #ff6600;">DISK_A</div>
         <div class="win-body" style="text-align: center; padding: 10px;">
             <div style="font-size: 3rem;">💾</div>
             <a href="DipanKharelResume.pdf" download="DipanKharelCV.pdf" style="font-weight: bold; margin-top: 5px; color: black; text-decoration: none; display: block;">RESUME.PDF</a>
+            <div style="font-size: 0.6rem; margin-top: 3px; color: #666;">click to download</div>
         </div>
     </div>
 
-    <div class="window" id="win-stack" style="top: 50%; left: 2%; width: 250px; z-index: 4;">
+    <div class="window" id="win-stack" style="top: 32%; left: 60%; width: 250px; z-index: 6;">
         <div class="win-header" style="background: var(--accent);">
             <span>/// TECH_STACK</span>
             <div class="win-controls"><span></span><span></span></div>
@@ -335,7 +314,7 @@
         </div>
     </div>
 
-    <div class="window" id="win-proj3" style="top: 58%; left: 20%; width: 300px; z-index: 3;">
+    <div class="window" id="win-proj3" style="top: 58%; left: 2%; width: 300px; z-index: 7;">
         <div class="win-header" style="background: var(--blue);">
             <span>PROJ_03: DATA_CONTRACT_ENGINE</span>
             <div class="win-controls"><span></span><span></span></div>
@@ -347,37 +326,16 @@
         </div>
     </div>
 
-    <div class="window" id="win-printer" style="top: 58%; left: 42%; width: 250px; z-index: 4;">
-        <div class="win-header" style="background: #7000ff;">
-            <span>THERMAL_PRINTER</span>
-            <div class="win-controls"><span></span><span></span></div>
-        </div>
-        <div class="win-body" style="padding: 10px; background: #fdfdfd;">
-            <div id="log-feed"></div>
-        </div>
-    </div>
-
-    <div class="window" id="win-connect" style="top: 52%; left: 65%; width: 220px; z-index: 6; transform: rotate(-5deg);">
+    <div class="window" id="win-connect" style="top: 58%; left: 38%; width: 280px; z-index: 8;">
         <div class="win-header" style="background: #008080;">
             <span>/// CONNECT</span>
             <div class="win-controls"><span></span><span></span></div>
         </div>
         <div class="win-body" style="text-align: center;">
-            <a href="#" style="font-size: 1.2rem; color: black; font-weight: bold; text-decoration: none; border-bottom: 3px solid black;">EMAIL ME</a>
-            <br><br>
-            <a href="https://github.com/munamadan" target="_blank" style="font-size: 0.8rem; color: black;">GITHUB: MUNAMADAN</a>
-        </div>
-    </div>
-
-    <div class="window" id="win-trap" style="top: 70%; left: 75%; width: 200px; z-index: 8;">
-        <div class="win-header" style="background: red;">
-            <span>DONT_PRESS.EXE</span>
-            <div class="win-controls"><span></span><span></span></div>
-        </div>
-        <div class="win-body" style="background: #ffd1d1; text-align: center;">
-            <div style="font-size: 3rem; margin-bottom: 10px;">⚠️</div>
-            <button class="danger-btn" id="btn-trap" onmousedown="event.stopPropagation()">INITIATE</button>
-            <div style="font-size: 0.6rem; margin-top: 5px;">NO REFUNDS</div>
+            <a href="mailto:dipankharel@gmail.com" style="font-size: 1rem; color: black; font-weight: bold; text-decoration: none; border-bottom: 3px solid black; display: inline-block; margin-bottom: 15px;">dipankharel@gmail.com</a>
+            <br>
+            <a href="https://github.com/munamadan" target="_blank" style="font-size: 0.8rem; color: black; display: block; margin-bottom: 5px;">GITHUB: MUNAMADAN</a>
+            <a href="https://www.linkedin.com/in/dipan-kharel-5b6484291/" target="_blank" style="font-size: 0.8rem; color: black; display: block;">LINKEDIN: DIPAN-KHAREL</a>
         </div>
     </div>
 
@@ -622,37 +580,7 @@
             setTimeout(() => ghost.remove(), 800);
         }
 
-        // --- 4. THERMAL PRINTER ---
-        const logFeed = document.getElementById('log-feed');
-        const logs = ["FETCHING_STOCK_DATA...", "TRAINING_NEURAL_NET...", "WAGTAIL_CMS_COMMIT", "ANALYZING_MARKET...", "API_GATEWAY_200", "USER_DETECTED", "DAEMON_START", "RENDER_DEPLOY_SUCCESS"];
-        
-        setInterval(() => {
-            const div = document.createElement('div');
-            div.className = 'log-line';
-            div.innerText = `> ${logs[Math.floor(Math.random()*logs.length)]} [${Math.floor(Math.random()*999)}]`;
-            logFeed.prepend(div);
-            if(logFeed.children.length > 20) logFeed.lastChild.remove();
-        }, 800);
-
-        // --- 5. THE TRAP ---
-        const msgs = ["ERROR_404", "WHY?", "STOP", "SYSTEM_FAIL", "UNDO", "REBOOT_REQ", "FATAL_EXCEPTION"];
-        document.getElementById('btn-trap').addEventListener('click', (e) => {
-            e.stopPropagation();
-            for(let i=0; i<5; i++) {
-                const win = document.createElement('div');
-                win.className = 'window spam-window';
-                win.style.left = Math.random() * (window.innerWidth - 200) + 'px';
-                win.style.top = Math.random() * (window.innerHeight - 100) + 'px';
-                win.style.zIndex = maxZ + 10;
-                const msg = msgs[Math.floor(Math.random()*msgs.length)];
-                win.innerHTML = `<div class="win-header" style="background:red;"><span>${msg}</span></div><div class="win-body" style="color:black;">ILLEGAL OPERATION</div>`;
-                document.body.appendChild(win);
-                win.querySelector('.win-header').addEventListener('mousedown', dragStart);
-                bringToFront(win);
-            }
-        });
-
-        // --- 6. STAMPS ---
+        // --- 4. STAMPS ---
         document.addEventListener('click', (e) => {
             if (e.target.closest('.window') || e.target.id === 'reset-layout' || e.target.closest('#boot-screen')) return;
             const stamps = ['APPROVED', 'VOID', '404', 'ERROR', 'NULL', '★', '⚡'];
